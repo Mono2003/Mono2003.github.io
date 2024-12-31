@@ -1,0 +1,27 @@
+{
+    "projects":[
+        {
+            "title": "Personal Website",
+            "intro": "An autobiographical static site built with Astro. Styled with Fomantic UI. Hosted on GitHub Pages.",
+            "skill": [
+                "Astro",
+                "React",
+                "JavaScript",
+                "HTML",
+                "CSS",
+                "GH Pages"
+            ],
+            "url":"https://github.com/Mono2003/Mono2003.github.io",
+            "emoji":"computer"
+        },
+        {
+            "title": "1",
+            "intro": "a",
+            "skill": [
+                "?"
+            ],
+            "url":"",
+            "emoji":""
+        }
+    ]
+}

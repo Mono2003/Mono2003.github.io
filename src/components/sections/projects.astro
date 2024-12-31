@@ -1,0 +1,14 @@
+---
+import projects from "../../data/projects.json";
+import Card from "../../components/utils/Card.astro"
+
+interface Props {
+    id: string;
+}
+
+const { id }: Props = Astro.props;
+---
+
+<div class="ui two centered stackable cards" style="margin-top: 10px;">
+    {projects["projects"].map((proj) => <Card {...proj} />)}
+</div>

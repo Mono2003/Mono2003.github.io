@@ -1,0 +1,109 @@
+---
+import "semantic-ui-css/semantic.min.css"
+
+interface Props {
+    title: string;
+    intro: string;
+    skill: string[];
+    url?: string;
+    icon?: string;
+    emoji: string;
+}
+
+const {title, intro, skill, url, icon, emoji}: Props = Astro.props;
+
+const languages = new Set([
+    "Python",
+    "Javascript",
+    "Typescript",
+    "HTML",
+    "CSS",
+]);
+
+const libraries = new Set([
+    "React",
+    "Astro",
+])
+
+const deploy = new Set([
+    "Github Pages",
+    "AWS EC2",
+])
+
+const database = new Set(["MySQL", "SQLite"]);
+const misc = new Set([
+    "Twitter API",
+    "Pytest",
+    "MapReduce",
+    "BeautifulSoup",
+    "iCal",
+    "Unix",
+    "Datadog",
+]);
+
+const getLabelStyle = (tech: string) => {
+    let backgroundColor;
+    let fontColor;
+
+    if (languages.has(tech)) {
+        backgroundColor = "var(--blue-2-bright)";
+        fontColor = "var(--white)";
+    } else if (libraries.has(tech)) {
+        backgroundColor = "var(--blue-1)";
+        fontColor = "var(--white)";
+    } else if (deploy.has(tech)) {
+        backgroundColor = "var(--light-gray)";
+    } else if (database.has(tech)) {
+        backgroundColor = "var(--blue-3)";
+        fontColor = "var(--white)";
+    } else if (misc.has(tech)) {
+        backgroundColor = "var(--blue-4)";
+    } else {
+        return "var(--white)";
+    }
+    return {
+        backgroundColor: backgroundColor,
+        color: fontColor,
+    };
+};
+---
+
+<div class="ui card">
+    <div class="content">
+        <div class="left floadted image">
+            {
+                icon && (
+                    <i
+                        class={`${icon} big icon`}
+                        style="width: 3em; line-height: normal;"
+                    />
+                )
+            }
+            {emoji && <em data-emoji={emoji} class="medium" />}
+        </div>
+        <div class="header">
+            {title}
+        </div>
+        <div class="description">{intro}</div>
+        {
+            url ? (
+                <a href={url} target="_blank">
+                    <div class={`ui right floating icon label`}>
+                        <i class="github icon"></i> 
+                    </div>
+                </a>
+            ) : null
+        }
+    </div>
+    <div class={`extra content`}>
+        <div class="ui labels">
+            {
+                skill.map((t) => (
+                    <div class="ui label" style={getLabelStyle(t)}>
+                        {t}
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>

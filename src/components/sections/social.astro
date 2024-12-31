@@ -1,0 +1,51 @@
+---
+import contact from "../../data/contact.json";
+
+interface Props {
+    id: string;
+}
+
+const { id }: Props = Astro.props;
+
+const umichEmail = contact["email"]["umich"];
+const personalEmail = contact["email"]["personal"];
+
+const updatedYear = 2025;
+---
+
+<footer id={id} class="footer container">
+    <h2>Contact Me</h2>
+    <div class="ui two column stackable grid footer-grid">
+        <div class="column">
+            <div class="ui list">
+                <div>
+                    <i class="graduation cap icon"></i>
+                    <a href=`mailto: ${umichEmail}`>{umichEmail}</a>
+                </div>
+                <div>
+                    <i class="envelope icon"></i>
+                    <a href=`mailto: ${personalEmail}`>
+                        {personalEmail}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui list">
+                <div>
+                    <i class="linkedin icon"></i>
+                    <a href={contact["linkedin"]} target="_blank">
+                        Yuzhe Niu on LinkedIn
+                    </a>
+                </div>
+                <div>
+                    <i class="github icon"></i>
+                    <a href={contact["github"]} target="_blank">
+                        Yuzhe on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span>Updated {updatedYear}</span>
+</footer>

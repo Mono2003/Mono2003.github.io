@@ -2,6 +2,9 @@
 import Intro from '../components/sections/intro.astro';
 import Projects from "../components/sections/projects.astro";
 import Contact from "../components/sections/social.astro"
+import Sidebar from "../components/sidebar/Sidebar.astro"
+import SidebarToggle from "../components/sidebar/SidebarToggle.astro";
+import PageWrapper from "../layouts/PageWrapper.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -10,13 +13,40 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		
 	</head>
+	<PageWrapper
+    title="Yuzhe Niu"
+    description="Yuzhe Niu"
+    keywords={["yuzheniu, Yuzhe Niu, felixniu"]}
+    author="Yuzhe Niu"
+    useFomantic={true}
+>
+<Sidebar slot="sidebar" />
+<main class="ui center aligned container">
+	<SidebarToggle />
+	<Intro />
+	<div class="ui divider"></div>
+	<div>
+		<Projects id="projects" />
+	</div>
+	<div class="ui divider"></div>
+	<Contact id="contact" />
+</main>
+
+</PageWrapper>
 	<body>
 		
-		<main>
-			<Intro />
-			<Projects id="projects" />
-			<Contact id="contact" />
-		</main>
 		
 	</body>
 </html>
+
+<style>
+    /* Fomantic overrides */
+    .ui.container {
+        max-width: 933px;
+        margin-top: 25px;
+    }
+
+    .ui.divider {
+        border-top: 1px solid var(--accent) !important;
+    }
+</style>

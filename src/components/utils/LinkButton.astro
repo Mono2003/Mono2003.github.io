@@ -1,0 +1,28 @@
+---
+interface Props {
+    icon?: string;
+    id?: string;
+    href?: string;
+    label: string;
+    tooltip?: string;
+}
+
+const { icon, id, href, label, tooltip }: Props = Astro.props;
+---
+
+<a
+    class=`ui ${icon} button`
+    id={id}
+    href={href}
+    target="_blank"
+    data-tooltip={tooltip}
+>
+    <i class=`${icon} icon`></i>
+    {label}
+</a>
+
+<style>
+    i.github.black {
+        color: var(--white) !important;
+    }
+</style>

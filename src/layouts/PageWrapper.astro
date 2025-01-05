@@ -1,0 +1,74 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    keywords: Array<string>;
+    author: string;
+    useFomantic: boolean;
+}
+
+const { title, description, keywords, author, useFomantic }: Props =
+    Astro.props;
+
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Custom Meta -->
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords.join(", ")} />
+        <meta name="author" content={author} />
+        <meta name="theme-color" content="#16171c" />
+        <meta property="og:title" content="Yuzhe Niu" />
+        <meta property="og:image" content="/melodell.png" />
+        <meta property="og:description" content="Yuzhe Niu" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+        <!-- Icon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <!-- Standard Meta -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        {
+            useFomantic && (
+                // Fomantic UI
+                <>
+                    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" />
+                    <link
+                        rel="stylesheet"
+                        type="text/css"
+                        href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css"
+                    />
+                    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js" />
+                </>
+            )
+        }
+    </head>
+    <body class="theme-dark">
+        <slot name="sidebar" />
+        <div class="pusher">
+            <slot />
+        </div>
+    </body>
+</html>

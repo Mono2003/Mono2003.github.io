@@ -3,6 +3,7 @@
         {
             "title": "Personal Website",
             "intro": "An autobiographical static site built with Astro. Styled with Fomantic UI. Hosted on GitHub Pages.",
+            "short": "You are here",
             "skill": [
                 "Astro",
                 "React",
@@ -15,13 +16,33 @@
             "emoji":"computer"
         },
         {
-            "title": "1",
-            "intro": "a",
+            "title": "EECS 485",
+            "intro": "Five programming projects, three focusing on web apps and two focusing on web distributed systems and web semantics.",
+            "short": "Covering static pages, server-side and client-side dynamic pages",
             "skill": [
-                "?"
+                "React",
+                "Jinja2",
+                "Flask",
+                "Python",
+                "SQLite",
+                "AWS EC2",
+                "MapReduce"
             ],
             "url":"",
-            "emoji":""
+            "emoji":"book"
+        },
+        {
+            "title": "Grafana Update",
+            "intro": "Help update the Grafana version of the company's visualization platform.",
+            "short": "My Baosight intern project",
+            "skill": [
+                "Grafana",
+                "JavaScript",
+                "TypeScript",
+                "HTML"
+            ],
+            "url":"",
+            "emoji":"wrench"
         }
     ]
 }

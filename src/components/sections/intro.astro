@@ -1,8 +1,59 @@
 ---
 import intro from "../../data/intro.json"
+import LinkButton from "../utils/LinkButton.astro";
+import socials from "../../data/contact.json";
+const resumeLink = "/ResumeMelinaODell.pdf";
 ---
 
-<div>
-    <h1>Yuzhe Niu (Felix)</h1>
-    {intro["intro"].map((sentence) => <p>{sentence}</p>)}
+<div class="ui two column stackable grid container">
+    <div class="center aligned column image-column">
+        
+    </div>
+    <div class="left aligned column">
+        <h1>Yuzhe Niu (Felix)</h1>
+        <h4>
+            {intro["intro"].map((sentence) => <p>{sentence}</p>)}
+        </h4>
+        
+        <br />
+        <div class="ui center aligned container">
+            <div class="ui small stackable wrapping buttons">
+                <LinkButton
+                    icon="envelope"
+                    id="email-button"
+                    label="Email"
+                    tooltip="Copy felixniu@umich.edu to clipboard"
+                />
+                <LinkButton
+                    icon="linkedin"
+                    href={socials["linkedin"]}
+                    label="LinkedIn"
+                    tooltip="Visit my LinkedIn"
+                />
+                <LinkButton
+                    icon="github black"
+                    href={socials["github"]}
+                    label="GitHub"
+                    tooltip="Visit my GitHub"
+                />
+                <LinkButton
+                    icon="file alternate"
+                    href={resumeLink}
+                    label="Resume"
+                    tooltip="View my resume"
+                />
+            </div>
+        </div>
+    </div>
 </div>
+
+<script is:inline define:vars={{ socials }}>
+    // @ts-nocheck
+    // Copy email to clipboard on click
+    const email = socials["email"]["umich"];
+    const emailButton = document.getElementById("email-button");
+    const copyText = (text) => {
+        navigator.clipboard.writeText(text);
+    };
+    emailButton.addEventListener("click", () => copyText(email));
+</script>

@@ -1,0 +1,197 @@
+---
+import ThemeButton from "../utils/Themebutton.astro";
+import sections from "../../data/sections.json";
+
+const resumeLink = "/Resume.pdf";
+---
+
+<div id="sidebar" class="ui left vertical thin overlay sidebar menu">
+    <!-- Logo -->
+    <div class="item center-items">
+        <img
+            class="item anchor logo"
+            data-href="#"
+            src="/logo.jpg"
+            alt="Logo"
+            width="100"
+            height="100"
+        />
+    </div>
+
+    <!-- Anchor links -->
+    <div class="item center-items">
+        <div class="menu">
+            {
+                sections["sections"].map((s) => (
+                    <span class="item anchor" data-href={`${s.href}`}>
+                        {s.name}
+                    </span>
+                ))
+            }
+        </div>
+    </div>
+
+    <div class="item center-items">
+        <div class="menu">
+            <!-- Resume Download -->
+            <a class="item" href={resumeLink}>
+                Resume
+                <i class="external alternate icon"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Theme toggle -->
+    <div style="position: absolute; bottom: 0; width: 100%;">
+        <div class="item"></div>
+        <ThemeButton />
+    </div>
+</div>
+
+<script is:inline define:vars={{ sections }}>
+    // Set active anchor link on click
+
+    const navlinks = document.querySelectorAll(".anchor");
+    const activeAnchor = window.location.hash;
+
+    navlinks.forEach((linkEl) => {
+        // Set initial focus
+        linkEl.getAttribute("data-href") === activeAnchor
+            ? linkEl.classList.add("active")
+            : linkEl.classList.remove("active");
+
+        linkEl.addEventListener("click", (e) => {
+            // Change focus on click
+            const navlinks = document.querySelectorAll(".anchor");
+            navlinks.forEach((link) => link.classList.remove("active"));
+            e.target.classList.add("active");
+            window.location.hash = e.target.getAttribute("data-href");
+
+            // Change section, if necessary;
+            sections.sections.forEach((section) => {
+                // If there is an active anchor
+                if (section.href === window.location.hash) {
+                    // If the active anchor has a category and isn't the selected category
+                    if (
+                        section.category &&
+                        localStorage.getItem("sectionSelection") !==
+                            section.category
+                    ) {
+                        document.getElementById(section.category).click(); // Click the category to switch
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+{/* Listen for swipe events */}
+<script src="../../scripts/swiped-events.min.js"></script>
+
+<script>
+    // @ts-nocheck
+    // https://fomantic-ui.com/modules/sidebar.html#/usage
+    const sidebarScreenSizeThreshold = 1160;
+    const isSmallScreen = () => window.innerWidth < sidebarScreenSizeThreshold;
+    const sidebar = $("#sidebar");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const sidebarToggleHitbox = document.getElementById(
+        "sidebar-toggle-hitbox"
+    );
+    const pusher = document.querySelector(".pusher");
+
+    const showSidebar = () => {
+        sidebar.sidebar("show");
+        sidebarToggle.classList.add(...["flipped", "sidebar-open"]);
+        sidebarToggle.classList.remove("sidebar-closed");
+    };
+
+    const hideSidebar = () => {
+        sidebar.sidebar("hide");
+        sidebarToggle.classList.remove(...["flipped", "sidebar-open"]);
+        sidebarToggle.classList.add("sidebar-closed");
+    };
+
+    // Make sidebar toggleable on small screens and default to hidden
+    if (isSmallScreen()) {
+        sidebar.sidebar({
+            dimPage: false,
+            transition: "overlay",
+            mobileTransition: "overlay",
+            exclusive: false,
+            closable: false,
+        });
+
+        // Show/hide sidebar on toggle arrow click
+        sidebarToggleHitbox.addEventListener("click", () => {
+            sidebar.sidebar("is hidden") ? showSidebar() : hideSidebar();
+        });
+
+        // Hide sidebar when clicking elsewhere on the page
+        pusher.addEventListener("click", () => {
+            if (sidebar.sidebar("is visible")) {
+                hideSidebar();
+            }
+        });
+
+        // Show/hide sidebar when screen size changes
+        window.addEventListener("resize", () => {
+            if (isSmallScreen()) {
+                hideSidebar();
+            } else {
+                showSidebar();
+            }
+        });
+
+        // Detect swipe events to show/hide sidebar
+        document.addEventListener("swiped-left", () => hideSidebar());
+        document.addEventListener("swiped-right", () => showSidebar());
+    } else {
+        // Always show sidebar on large screens and hide toggle arrow
+        sidebar.addClass("visible");
+        sidebarToggle.hidden = true;
+    }
+</script>
+
+<style>
+    /* Fomantic overrides */
+    .ui.visible.sidebar {
+        box-shadow: 0 0 20px var(--accent) !important;
+    }
+
+    .ui.menu {
+        background: var(--background-color) !important;
+    }
+
+    .menu {
+        margin-top: 0 !important;
+    }
+
+    .item {
+        color: var(--text-color) !important;
+        font-size: 1em !important;
+    }
+
+    .item::before {
+        background: var(--accent) !important;
+    }
+
+    .active {
+        text-decoration: underline !important;
+    }
+
+    .active.logo {
+        background: none !important;
+    }
+
+    /* Styles */
+    .center-items {
+        display: flex !important;
+        justify-content: center !important;
+        text-align: center;
+    }
+
+    .anchor {
+        cursor: pointer;
+    }
+</style>

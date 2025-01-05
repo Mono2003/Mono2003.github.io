@@ -1,21 +1,22 @@
 ---
-import "semantic-ui-css/semantic.min.css"
 
 interface Props {
     title: string;
     intro: string;
+    short: string;
     skill: string[];
     url?: string;
     icon?: string;
     emoji: string;
 }
 
-const {title, intro, skill, url, icon, emoji}: Props = Astro.props;
+const {title, intro, short,skill, url, icon, emoji}: Props = Astro.props;
 
 const languages = new Set([
+    "Flask",
     "Python",
-    "Javascript",
-    "Typescript",
+    "JavaScript",
+    "TypeScript",
     "HTML",
     "CSS",
 ]);
@@ -23,6 +24,8 @@ const languages = new Set([
 const libraries = new Set([
     "React",
     "Astro",
+    "Jinja2",
+    "Grafana"
 ])
 
 const deploy = new Set([
@@ -70,7 +73,7 @@ const getLabelStyle = (tech: string) => {
 
 <div class="ui card">
     <div class="content">
-        <div class="left floadted image">
+        <div class="left floated image">
             {
                 icon && (
                     <i
@@ -84,6 +87,7 @@ const getLabelStyle = (tech: string) => {
         <div class="header">
             {title}
         </div>
+        <div class="meta">{short}</div>
         <div class="description">{intro}</div>
         {
             url ? (
@@ -107,3 +111,31 @@ const getLabelStyle = (tech: string) => {
         </div>
     </div>
 </div>
+
+<style>
+    /* Fomantic overrides */
+    .ui.card {
+        background: var(--background-color) !important;
+        box-shadow:
+            0 1px 3px 0 var(--accent),
+            0 0 0 1px var(--accent) !important;
+
+        margin: 20px;
+    }
+
+    .ui.card > .content > .header,
+    .ui.card > .content > .description,
+    .ui.card > .extra,
+    .ui.card .meta {
+        color: var(--text-color) !important;
+    }
+
+    .ui.card .meta {
+        opacity: 0.5;
+        font-size: 0.9em;
+    }
+
+    .ui.card > .extra {
+        border-top: 1px solid var(--accent) !important;
+    }
+</style>

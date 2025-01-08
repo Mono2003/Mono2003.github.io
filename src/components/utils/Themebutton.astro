@@ -38,3 +38,24 @@
         setTheme(isDark ? "light" : "dark");
     });
 </script>
+
+<style>
+    /* Fomantic overrides */
+    .item::before {
+        background: var(--accent) !important;
+    }
+
+    /* Styles */
+    #theme-toggle {
+        padding: 20px;
+        min-width: 140px;
+    }
+    .center-items {
+        display: flex !important;
+        justify-content: center !important;
+    }
+    i {
+        margin: 0 !important;
+        color: var(--text-color) !important;
+    }
+</style>

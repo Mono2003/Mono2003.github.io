@@ -9,35 +9,28 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		
-	</head>
-	<PageWrapper
+
+<PageWrapper
     title="Yuzhe Niu"
     description="Yuzhe Niu"
     keywords={["yuzheniu, Yuzhe Niu, felixniu"]}
     author="Yuzhe Niu"
     useFomantic={true}
 >
-<Sidebar slot="sidebar" />
-<main class="ui center aligned container">
-	<SidebarToggle />
-	<Intro />
-	<div class="ui divider"></div>
-	<div>
-		<Projects id="projects" />
-	</div>
-	<div class="ui divider"></div>
-	<Contact id="contact" />
-</main>
+    <Sidebar slot="sidebar" />
+    <main class="ui center aligned container">
+        <SidebarToggle />
+        <Intro />
+        <div class="ui divider"></div>
+        <div>
+            <Projects id="projects" />
+        </div>
+        <div class="ui divider"></div>
+        <Contact id="contact" />
+    </main>
 
 </PageWrapper>
-	<body>
-		
-		
-	</body>
-</html>
+
 
 <style>
     /* Fomantic overrides */

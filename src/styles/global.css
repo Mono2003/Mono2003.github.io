@@ -18,7 +18,7 @@
 }
 
 .theme-dark {
-    --background-color: var(--black);
+    --background-color: var(--gray);
     --accent: var(--blue-1);
     --text-color: var(--white);
 }
@@ -35,4 +35,16 @@ a {
 
 h2 {
     margin-top: 0;
+}
+
+body.theme-light, body.theme-dark { 
+    background-color: var(--background-color) !important; color: var(--text-color) !important; 
+}
+
+body.theme-light a {
+     color: var(--blue-2-bright) !important; 
+}
+
+body.theme-dark a {
+     color: var(--blue-2-bright) !important;
 }

@@ -18,7 +18,7 @@
 }
 
 .theme-dark {
-    --background-color: var(--gray);
+    --background-color: var(--black);
     --accent: var(--blue-1);
     --text-color: var(--white);
 }
